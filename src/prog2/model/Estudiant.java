@@ -61,7 +61,7 @@ public class Estudiant extends Usuari {
 
     /**
      * Retorna un String amb la informació de l'Estudiant.
-     * @return
+     * @return String
      */
     @Override
     public String toString() {
