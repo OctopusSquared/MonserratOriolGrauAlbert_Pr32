@@ -1,20 +1,35 @@
 package prog2.model;
 
 import java.util.Date;
-import prog2.vista.BiblioException;
 
 public class PrestecLlarg  extends Prestec {
+
+    // Atributs
+    //------------
+
     private static final long DURADA = 140000; // Temps en ms
     private Date dataCreacio;
     private Date dataLimitRetorn;
     private boolean retornat;
 
+    // Constructors
+    //---------------
+
+    /**
+     * Constructor per paràmetres de la classe.
+     * @param exemplar
+     * @param usuari
+     * @param data
+     */
     public PrestecLlarg(Exemplar exemplar, Usuari usuari, Date data) {
         super(exemplar, usuari);
         dataCreacio = data;
         dataLimitRetorn = new Date(data.getTime() + DURADA);
         retornat = false;
     }
+
+    // Getters i Setters.
+    //---------------------
 
     public void setDataCreacio(Date data) { dataCreacio = data; }
     public Date getDataCreacio() { return dataCreacio; }
@@ -24,10 +39,13 @@ public class PrestecLlarg  extends Prestec {
     public void setRetornat(boolean retornat) { this.retornat = retornat; }
     public boolean getRetornat() { return retornat; }
 
+    // Mètodes
+    //---------
+
     /**
      * Retornar prestec.
      */
-    public void retorna() throws BiblioException {
+    public void retorna() {
         retornat = true;
     }
 
@@ -43,6 +61,10 @@ public class PrestecLlarg  extends Prestec {
         return dataLimitRetorn.after(dataCreacio);
     }
 
+    /**
+     * Retorna un String amb la informació de l'Estudiant.
+     * @return String
+     */
     @Override
     public String toString() {
         return "Tipus=" + tipusPrestec() +
