@@ -25,11 +25,10 @@ public class PrestecNormal extends Prestec {
     public boolean getRetornat() { return retornat; }
 
     /**
-     * Retornar prestec. Llança excepció si el prestec ja es vaig retornar
+     * Retornar prestec.
      */
-    public void retorna() throws BiblioException {
-        if (retornat) throw new BiblioException("PrestecNormal.retorna(): Llibre ja retornat!");
-        else retornat = true;
+    public void retorna() {
+        retornat = true;
     }
 
     /**
