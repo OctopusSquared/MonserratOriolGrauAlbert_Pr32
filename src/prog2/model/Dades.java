@@ -21,8 +21,7 @@ public class Dades implements InDades {
         llistaExemplars.afegir(exemplar);
     }
 
-    public ArrayList<Exemplar>
-    recuperaExemplars() {
+    public ArrayList<Exemplar> recuperaExemplars() {
         return llistaExemplars.getArrayList();
     }
 
