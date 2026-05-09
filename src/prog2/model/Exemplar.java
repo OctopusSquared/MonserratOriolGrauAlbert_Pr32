@@ -1,10 +1,8 @@
 package prog2.model;
 
 public class Exemplar implements InExemplar {
-
     // Atributs
     //------------
-
     private String id;
     private String autor;
     private String titol;
@@ -21,13 +19,13 @@ public class Exemplar implements InExemplar {
      * @param titol
      * @param admetPrestecLlarg
      */
-public Exemplar (String id, String autor, String titol, boolean admetPrestecLlarg){
-    this.id = id;
-    this.autor = autor;
-    this.titol = titol;
-    this.admetPrestecLlarg = admetPrestecLlarg;
-    disponible = true;
-}
+    public Exemplar (String id, String autor, String titol, boolean admetPrestecLlarg){
+        this.id = id;
+        this.autor = autor;
+        this.titol = titol;
+        this.admetPrestecLlarg = admetPrestecLlarg;
+        disponible = true;
+    }
 
     // Getters i Setters.
     //---------------------

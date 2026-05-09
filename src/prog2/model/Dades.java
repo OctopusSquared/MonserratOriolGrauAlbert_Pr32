@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Dades implements InDades {
+    // Atributs
+    //------------
     private LlistaExemplars llistaExemplars;
     private LlistaUsuaris llistaUsuaris;
     private LlistaPrestecs llistaPrestecs;
 
+    // Constructors
+    //---------------
+    /**
+     * Constructor per defecte de la classe.
+     */
     public Dades() {
         llistaExemplars = new LlistaExemplars();
         llistaUsuaris = new LlistaUsuaris();
@@ -16,15 +23,35 @@ public class Dades implements InDades {
 
     }
 
+    // Mètodes
+    //-------------
+    /**
+     * Afegeix un exemplar a la llista d'exemplars
+     * @param id
+     * @param titol
+     * @param autor
+     * @param admetPrestecLlarg
+     */
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
         Exemplar exemplar = new Exemplar(id, titol, autor, admetPrestecLlarg);
         llistaExemplars.afegir(exemplar);
     }
 
+    /**
+     * Retorna L'ArrayList d'exemplars
+     * @return ArrayList<Exemplar>
+     */
     public ArrayList<Exemplar> recuperaExemplars() {
         return llistaExemplars.getArrayList();
     }
 
+    /**
+     * Afegeix un usuari a la llista d'usuaris
+     * @param email
+     * @param nom
+     * @param adreca
+     * @param esEstudiant
+     */
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
         Usuari usuari;
         if (esEstudiant) {
@@ -37,10 +64,20 @@ public class Dades implements InDades {
         llistaUsuaris.afegir(usuari);
     }
 
+    /**
+     * Retorna L'ArrayList d'usuaris
+     * @return ArrayList<Usuari>
+     */
     public ArrayList<Usuari> recuperaUsuaris() {
         return llistaUsuaris.getArrayList();
     }
 
+    /**
+     * Afegeix un prèstec a la llista de prèstecs
+     * @param exemplarPos
+     * @param usuariPos
+     * @param esLlarg
+     */
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
         Exemplar exemplar = llistaExemplars.getAt(exemplarPos);
         Usuari usuari = llistaUsuaris.getAt(usuariPos);
@@ -92,6 +129,9 @@ public class Dades implements InDades {
         exemplar.setDisponible(false);
     }
 
+    /**
+     * Elimina un prestec de la llista, donada la seva posició.
+     */
     public void retornarPrestec(int position) throws BiblioException {
         Prestec prestec;
 
@@ -108,11 +148,18 @@ public class Dades implements InDades {
         prestec.getExemplar().setDisponible(true);
     }
 
-
+    /**
+     * Retorna L'ArrayList de prèstecs
+     * @return ArrayList<Prestec>
+     */
     public ArrayList<Prestec> recuperaPrestecs() {
         return llistaPrestecs.getArrayList();
     }
 
+    /**
+     * Retorna L'ArrayList de prèstecs NO retornats
+     * @return ArrayList<Prestec>
+     */
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
         ArrayList<Prestec> prestecs = new ArrayList<>();
 
