@@ -46,6 +46,11 @@ public class PrestecLlarg  extends Prestec {
      * Retornar prestec.
      */
     public void retorna() {
+        // Actualitzem exemplai i usuari
+        exemplar.setDisponible(true);
+        usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs() - 1);
+
+        // L'exemplar ha sigut retornat
         retornat = true;
     }
 
@@ -58,7 +63,7 @@ public class PrestecLlarg  extends Prestec {
      * Retornar true si el prestec està endarrerit per a la data actual
      */
     public boolean prestecEndarrerit() {
-        return dataLimitRetorn.after(dataCreacio);
+        return dataLimitRetorn.before(new Date()) && !retornat;
     }
 
     /**

@@ -3,8 +3,8 @@ package prog2.model;
 import java.io.Serializable;
 
 public abstract class Prestec implements InPrestec, Serializable {
-    private Exemplar exemplar;
-    private Usuari usuari;
+    protected Exemplar exemplar;
+    protected Usuari usuari;
 
     public Prestec(Exemplar exemplar, Usuari usuari) {
         this.exemplar = exemplar;

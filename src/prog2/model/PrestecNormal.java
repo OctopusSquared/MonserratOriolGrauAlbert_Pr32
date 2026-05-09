@@ -46,6 +46,11 @@ public class PrestecNormal extends Prestec {
      * Retornar prestec.
      */
     public void retorna() {
+        // Actualitzem exemplai i usuari
+        exemplar.setDisponible(true);
+        usuari.setNumPrestecsNormals(usuari.getNumPrestecsNormals() - 1);
+
+        // L'exemplar ha sigut retornat
         retornat = true;
     }
 
@@ -58,7 +63,7 @@ public class PrestecNormal extends Prestec {
      * Retornar true si el prestec està endarrerit per a la data actual
      */
     public boolean prestecEndarrerit() {
-        return dataLimitRetorn.after(dataCreacio);
+        return dataLimitRetorn.before(new Date()) && !retornat;
     }
 
     /**
