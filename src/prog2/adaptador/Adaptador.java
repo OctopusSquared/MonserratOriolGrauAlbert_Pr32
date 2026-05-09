@@ -22,7 +22,7 @@ public class Adaptador {
     }
 
     /**
-     * Constructor per paràmetres de la classe.
+     * Constructor còpia de la classe.
      * @param dades
      */
     public Adaptador(Dades dades) {
