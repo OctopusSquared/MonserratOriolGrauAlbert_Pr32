@@ -1,4 +1,4 @@
-package Vista;
+package prog2.vista;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,10 +6,10 @@ import java.io.File;
 
 public class AppBiblioUB extends JFrame {
 
-    private final ControladorGUI ctrl;
+    private final vista.ControladorGUI ctrl;
 
     public AppBiblioUB() {
-        this.ctrl = new ControladorGUI(new AdaptadorFacade());
+        this.ctrl = new vista.ControladorGUI(new Vista.AdaptadorFacade());
 
         setTitle("BiblioUB - Pràctica 3 Part 2");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -22,9 +22,9 @@ public class AppBiblioUB extends JFrame {
         JButton btnGuardar = new JButton("Guardar dades");
         JButton btnCarregar = new JButton("Carregar dades");
 
-        btnUsuaris.addActionListener(e -> new FrmGestioUsuaris(this, ctrl).setVisible(true));
-        btnExemplars.addActionListener(e -> new FrmGestioExemplars(this, ctrl).setVisible(true));
-        btnPrestecs.addActionListener(e -> new FrmGestioPrestecs(this, ctrl).setVisible(true));
+        btnUsuaris.addActionListener(e -> new Vista.FrmGestioUsuaris(this, ctrl).setVisible(true));
+        btnExemplars.addActionListener(e -> new vista.FrmGestioExemplars(this, ctrl).setVisible(true));
+        btnPrestecs.addActionListener(e -> new vista.FrmGestioPrestecs(this, ctrl).setVisible(true));
 
         btnGuardar.addActionListener(e -> guardar());
         btnCarregar.addActionListener(e -> carregar());

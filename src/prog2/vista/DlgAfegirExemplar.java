@@ -1,4 +1,4 @@
-package Vista;
+package prog2.vista;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,5 +45,8 @@ public class DlgAfegirExemplar extends JDialog {
         setLayout(new BorderLayout());
         add(form, BorderLayout.CENTER);
         add(botons, BorderLayout.SOUTH);
+    }
+
+    public DlgAfegirExemplar(JFrame parent, Vista.ControladorGUI ctrl) {
     }
 }

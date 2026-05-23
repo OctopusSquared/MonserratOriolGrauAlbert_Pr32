@@ -1,14 +1,14 @@
-package Vista;
+package prog2.vista;
 
 import java.io.File;
 import java.util.List;
 
 public class ControladorGUI {
 
-    private final IAdaptadorBiblio adapt;
+    private final Vista.IAdaptadorBiblio adapt;
 
-    public ControladorGUI(IAdaptadorBiblio adapt) {
-        this.adapt = adapt;
+    public ControladorGUI(Vista.AdaptadorFacade adapt) {
+        this.adapt = (Vista.IAdaptadorBiblio) adapt;
     }
 
     public List<String> usuaris() throws Exception { return adapt.llistaUsuaris(); }

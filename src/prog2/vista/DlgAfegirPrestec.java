@@ -1,4 +1,4 @@
-package Vista;
+package prog2.vista;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DlgAfegirPrestec extends JDialog {
 
-    public DlgAfegirPrestec(JFrame parent, ControladorGUI ctrl) {
+    public DlgAfegirPrestec(JFrame parent, Vista.ControladorGUI ctrl) {
         super(parent, "Afegir préstec", true);
 
         setSize(520, 260);

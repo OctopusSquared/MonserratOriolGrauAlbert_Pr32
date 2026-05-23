@@ -1,14 +1,14 @@
-package Vista;
+package prog2.vista;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class FrmGestioExemplars extends JDialog {
 
-    private final ControladorGUI ctrl;
+    private final Vista.ControladorGUI ctrl;
     private final DefaultListModel<String> model = new DefaultListModel<>();
 
-    public FrmGestioExemplars(JFrame parent, ControladorGUI ctrl) {
+    public FrmGestioExemplars(JFrame parent, Vista.ControladorGUI ctrl) {
         super(parent, "Gestió Exemplars", true);
         this.ctrl = ctrl;
 
@@ -23,7 +23,7 @@ public class FrmGestioExemplars extends JDialog {
 
         btnRefrescar.addActionListener(e -> carregar());
         btnAfegir.addActionListener(e -> {
-            new DlgAfegirExemplar(parent, ctrl).setVisible(true);
+            new Vista.DlgAfegirExemplar(parent, ctrl).setVisible(true);
             carregar();
         });
 

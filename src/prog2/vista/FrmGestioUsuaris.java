@@ -1,5 +1,7 @@
 package Vista;
 
+import prog2.vista.AppBiblioUB;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,6 +36,9 @@ public class FrmGestioUsuaris extends JDialog {
         add(new JScrollPane(lst), BorderLayout.CENTER);
 
         carregarLlista();
+    }
+
+    public FrmGestioUsuaris(AppBiblioUB parent, Vista.ControladorGUI ctrl) {
     }
 
     private void carregarLlista() {
