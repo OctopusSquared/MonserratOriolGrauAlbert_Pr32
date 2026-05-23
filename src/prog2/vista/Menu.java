@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * Implements a text menu from a list of options.
- * @author Xavi Baró
+ * @author Albert Grau i Oriol Monserrat.
  */
 public class Menu<TEnum> {
      /**

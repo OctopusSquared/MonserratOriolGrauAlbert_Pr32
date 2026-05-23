@@ -1,4 +1,4 @@
-package Vista;
+package prog2.vista;
 
 import prog2.vista.AppBiblioUB;
 
