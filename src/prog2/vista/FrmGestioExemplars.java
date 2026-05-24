@@ -12,20 +12,31 @@ public class FrmGestioExemplars extends JDialog {
     private JList Exemplars;
     private JButton afegirExemplarButton;
     private JButton tornarEnrereButton;
+
     private Adaptador adaptador;
     private DefaultListModel<String> model;
 
     public FrmGestioExemplars(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
-        this.adaptador = adaptador;
-        setTitle("Gestio Exemplars");
-        setContentPane(panel);
+
         setSize(600, 400);
+        setTitle("Gestio Exemplars");
         setLocationRelativeTo(parent);
+        setContentPane(panel);
         setModal(true);
+
         model = new DefaultListModel<>();
         Exemplars.setModel(model);
         carregarExemplars();
+
+        this.adaptador = adaptador;
+
+        tornarEnrereButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
         afegirExemplarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -34,19 +45,17 @@ public class FrmGestioExemplars extends JDialog {
                carregarExemplars();
             }
         });
-        tornarEnrereButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+
     }
 
     public void carregarExemplars(){
-        model.clear(); // buidem el model
+        // Buidar model
+        model.clear();
+
+        // Afegim iterativament
         ArrayList<String> exemplars = (ArrayList<String>) adaptador.llistaExemplarsToLlistaString();
-        for (String u : exemplars) {
-            model.addElement(u); // afegim al model, el JList es refresca sol
+        for (String usu : exemplars) {
+            model.addElement(usu);
         }
     }
 }

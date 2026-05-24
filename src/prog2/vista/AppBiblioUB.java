@@ -16,6 +16,7 @@ public class AppBiblioUB extends JFrame {
     private JButton guardarDadesButton;
     private JButton carregarDadesButton;
     private JButton sortirButton;
+
     private JLabel Separador1;
     private JLabel Separador2;
 
@@ -31,23 +32,31 @@ public class AppBiblioUB extends JFrame {
     }
     public AppBiblioUB() {
         adaptador  = new Adaptador();
-        setTitle("Biblioteca UB");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(biblioUB);
         setSize(500,300);
         setLocationRelativeTo(null);
+        setTitle("Biblioteca UB");
+        setContentPane(biblioUB);
+        guardarDadesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomFitxer = JOptionPane.showInputDialog(AppBiblioUB.this, "Introdueix el nom del fitxer:", "Guardar Dades", JOptionPane.QUESTION_MESSAGE);
+
+                if (nomFitxer != null && !nomFitxer.trim().isEmpty()) {
+                    try {
+                        adaptador.guardaDades(nomFitxer.trim());
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades guardades.");
+                    } catch (BiblioException ex) {
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Atencio: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
         btnGestioUsuaris.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmGestioUsuaris gestioUsuaris = new FrmGestioUsuaris(AppBiblioUB.this, adaptador);
                 gestioUsuaris.setVisible(true);
-            }
-        });
-        btnGestioExemplars.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmGestioExemplars gestioExemplars = new FrmGestioExemplars(AppBiblioUB.this, adaptador);
-                gestioExemplars.setVisible(true);
             }
         });
         sortirButton.addActionListener(new ActionListener() {
@@ -56,32 +65,11 @@ public class AppBiblioUB extends JFrame {
                 dispose();
             }
         });
-        btnGestioPrestecs.addActionListener(new ActionListener() {
+        btnGestioExemplars.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioPrestecs gestioPrestecs = new FrmGestioPrestecs(AppBiblioUB.this, adaptador);
-                gestioPrestecs.setVisible(true);
-            }
-        });
-        guardarDadesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nomFitxer = JOptionPane.showInputDialog(
-                        AppBiblioUB.this,
-                        "Introdueix el nom del fitxer:",
-                        "Guardar Dades",
-                        JOptionPane.QUESTION_MESSAGE);
-                if (nomFitxer != null && !nomFitxer.trim().isEmpty()) {
-                    try {
-                        adaptador.guardaDades(nomFitxer.trim());
-                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades guardades.");
-                    } catch (BiblioException ex) {
-                        JOptionPane.showMessageDialog(AppBiblioUB.this,
-                                "Atencio: " + ex.getMessage(),
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
+                FrmGestioExemplars gestioExemplars = new FrmGestioExemplars(AppBiblioUB.this, adaptador);
+                gestioExemplars.setVisible(true);
             }
         });
         carregarDadesButton.addActionListener(new ActionListener() {
@@ -97,14 +85,18 @@ public class AppBiblioUB extends JFrame {
                         adaptador.carregaDades(cami);
                         JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades carregades.");
                     } catch (BiblioException ex) {
-                        JOptionPane.showMessageDialog(AppBiblioUB.this,
-                                "Atencio: " + ex.getMessage(),
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Atencio: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
 
+        });
+        btnGestioPrestecs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioPrestecs gestioPrestecs = new FrmGestioPrestecs(AppBiblioUB.this, adaptador);
+                gestioPrestecs.setVisible(true);
+            }
         });
     }
 

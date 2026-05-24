@@ -14,52 +14,53 @@ public class FrmAfegirExemplars extends JDialog {
     private JCheckBox prestecLlargCheckBox;
     private JButton afegirButton;
     private JButton cancelaButton;
+
     private Adaptador adaptador;
+
+
     public FrmAfegirExemplars(FrmGestioExemplars parent, Adaptador adaptador) {
         super(parent);
-        this.adaptador = adaptador;
-        setTitle("Afegir Exemplar");
-        setContentPane(panel);
+
         setSize(500, 400);
+        setTitle("Afegir Exemplar");
         setLocationRelativeTo(parent);
+        setContentPane(panel);
         setModal(true);
-        afegirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                accionarAfegirExemplars();
-            }
-        });
+
+        this.adaptador = adaptador;
+
+
         cancelaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
+        afegirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                accionarAfegirExemplars();
+            }
+        });
     }
 
     public void accionarAfegirExemplars() {
-        String id = txtId.getText().trim();
         String titol = txtTitol.getText().trim();
+        String id = txtId.getText().trim();
         String autor = txtAutor.getText().trim();
         boolean prestecLlarg = prestecLlargCheckBox.isSelected();
 
         if (id.isEmpty() || titol.isEmpty() || autor.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "S'han d'omplir tots els camps obligatoris.",
-                    "Camps Buits",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hi ha camps buits. S'han d'omplir tots els campps", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
             adaptador.afegirExemplar(id, titol, autor, prestecLlarg);
-            JOptionPane.showMessageDialog(this, "Exemplar afegit correctament.");
+            JOptionPane.showMessageDialog(this, "Exemplar afegit.");
             dispose();
         } catch (BiblioException ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Error: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Atencio: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

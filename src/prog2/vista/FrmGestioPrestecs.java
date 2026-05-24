@@ -16,32 +16,29 @@ public class FrmGestioPrestecs extends JDialog {
     private JButton tornarPrestecButton;
     private JButton afegirPrestecButton;
     private JButton tornarEnrereButton;
+
     private Adaptador adaptador;
     private DefaultListModel<String> model;
 
     public FrmGestioPrestecs(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
-        this.adaptador = adaptador;
-        setTitle("Gestio Prestecs");
-        setContentPane(panel1);
+
         setSize(600, 400);
+        setTitle("Gestio Prestecs");
         setLocationRelativeTo(parent);
+        setContentPane(panel1);
         setModal(true);
+        prestecsRetornatsCheckBox.setSelected(true);
+
         model = new DefaultListModel<>();
         Prestecs.setModel(model);
-        prestecsRetornatsCheckBox.setSelected(true);
         carregarPrestecs();
+
+        this.adaptador = adaptador;
+
         prestecsRetornatsCheckBox.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                carregarPrestecs();
-            }
-        });
-        afegirPrestecButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmAfegirPrestec afegirPrestec = new FrmAfegirPrestec(FrmGestioPrestecs.this, adaptador);
-                afegirPrestec.setVisible(true);
                 carregarPrestecs();
             }
         });
@@ -53,10 +50,7 @@ public class FrmGestioPrestecs extends JDialog {
                     adaptador.retornarPrestec(prestecSeleccionat);
                     carregarPrestecs();
                 } catch (BiblioException ex) {
-                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this,
-                            "Error: " + ex.getMessage(),
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(FrmGestioPrestecs.this, "Atencio: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -67,10 +61,21 @@ public class FrmGestioPrestecs extends JDialog {
                 dispose();
             }
         });
+        afegirPrestecButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmAfegirPrestec afegirPrestec = new FrmAfegirPrestec(FrmGestioPrestecs.this, adaptador);
+                afegirPrestec.setVisible(true);
+                carregarPrestecs();
+            }
+        });
     }
 
     private void carregarPrestecs() {
-        model.clear(); // buidem el model
+        // Buidar model
+        model.clear();
+
+        // Afegim iterativament
         ArrayList<String> prestecs = (ArrayList<String>) (prestecsRetornatsCheckBox.isSelected() ? adaptador.llistaPrestecsToLlistaString() : adaptador.llistaPrestecsNoRetornatsToLlistaString());
         for (String u : prestecs) {
                 model.addElement(u);

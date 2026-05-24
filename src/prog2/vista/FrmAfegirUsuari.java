@@ -19,19 +19,14 @@ public class FrmAfegirUsuari extends JDialog {
 
     public FrmAfegirUsuari(FrmGestioUsuaris parent, Adaptador adaptador) {
         super(parent);
-        this.adaptador = adaptador;
-        setTitle("Afegir Usuari");
-        setContentPane(contentPane);
+
         setSize(500, 400);
+        setTitle("Afegir Usuari");
         setLocationRelativeTo(parent);
+        setContentPane(contentPane);
         setModal(true);
 
-        btnAfegir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                accionarAfegirUsuari();
-            }
-        });
+        this.adaptador = adaptador;
 
         btnCancelar.addActionListener(new ActionListener() {
             @Override
@@ -39,19 +34,22 @@ public class FrmAfegirUsuari extends JDialog {
                 dispose();
             }
         });
+        btnAfegir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                accionarAfegirUsuari();
+            }
+        });
     }
 
     private void accionarAfegirUsuari() {
+        String adreca = txtAdreca.getText().trim();
         String email  = txtEmail.getText().trim();
         String nom    = txtNom.getText().trim();
-        String adreca = txtAdreca.getText().trim();
         boolean esEst = chkEstudiant.isSelected();
 
         if (email.isEmpty() || nom.isEmpty() || adreca.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "S'han d'omplir tots els camps obligatoris.",
-                    "Camps Buits",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hi ha camps buits. S'han d'omplir tots els campps", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -60,10 +58,7 @@ public class FrmAfegirUsuari extends JDialog {
             JOptionPane.showMessageDialog(this, "Usuari afegit correctament.");
             dispose();
         } catch (BiblioException ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Error: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Atencio: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

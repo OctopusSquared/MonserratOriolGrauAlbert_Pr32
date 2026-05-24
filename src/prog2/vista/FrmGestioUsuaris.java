@@ -18,15 +18,19 @@ public class FrmGestioUsuaris extends JDialog {
 
     public FrmGestioUsuaris(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
-        this.adaptador = adaptador;
-        setTitle("Gestio Usuari");
-        setContentPane(panel);
+
         setSize(600, 400);
+        setTitle("Gestio Usuari");
         setLocationRelativeTo(parent);
+        setContentPane(panel);
         setModal(true);
+
         model = new DefaultListModel<>();
         Usuaris.setModel(model);
         carregarUsuaris();
+
+        this.adaptador = adaptador;
+
         btnAfegir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,7 +39,6 @@ public class FrmGestioUsuaris extends JDialog {
                 carregarUsuaris();
             }
         });
-
         btnTornar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,10 +47,13 @@ public class FrmGestioUsuaris extends JDialog {
         });
     }
     public void carregarUsuaris() {
-        model.clear(); // buidem el model
+        // Buidar model
+        model.clear();
+
+        // Afegim iterativament
         ArrayList<String> usuaris = (ArrayList<String>) adaptador.llistaUsuarisToLlistaString();
-        for (String u : usuaris) {
-            model.addElement(u); // afegim al model, el JList es refresca sol
+        for (String usu : usuaris) {
+            model.addElement(usu);
         }
     }
 
