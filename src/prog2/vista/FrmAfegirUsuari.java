@@ -22,7 +22,7 @@ public class FrmAfegirUsuari extends JDialog {
         this.adaptador = adaptador;
         setTitle("Afegir Usuari");
         setContentPane(contentPane);
-        setSize(600, 500);
+        setSize(500, 400);
         setLocationRelativeTo(parent);
         setModal(true);
 

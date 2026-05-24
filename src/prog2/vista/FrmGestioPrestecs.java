@@ -24,7 +24,7 @@ public class FrmGestioPrestecs extends JDialog {
         this.adaptador = adaptador;
         setTitle("Gestio Prestecs");
         setContentPane(panel1);
-        setSize(600, 500);
+        setSize(600, 400);
         setLocationRelativeTo(parent);
         setModal(true);
         model = new DefaultListModel<>();

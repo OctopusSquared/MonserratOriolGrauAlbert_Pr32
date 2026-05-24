@@ -20,7 +20,7 @@ public class FrmAfegirExemplars extends JDialog {
         this.adaptador = adaptador;
         setTitle("Afegir Exemplar");
         setContentPane(panel);
-        setSize(600, 500);
+        setSize(500, 400);
         setLocationRelativeTo(parent);
         setModal(true);
         afegirButton.addActionListener(new ActionListener() {

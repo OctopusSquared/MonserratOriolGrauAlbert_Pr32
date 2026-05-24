@@ -20,7 +20,7 @@ public class FrmGestioExemplars extends JDialog {
         this.adaptador = adaptador;
         setTitle("Gestio Exemplars");
         setContentPane(panel);
-        setSize(600, 500);
+        setSize(600, 400);
         setLocationRelativeTo(parent);
         setModal(true);
         model = new DefaultListModel<>();
