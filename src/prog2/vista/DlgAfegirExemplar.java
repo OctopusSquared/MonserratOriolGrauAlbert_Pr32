@@ -46,7 +46,4 @@ public class DlgAfegirExemplar extends JDialog {
         add(form, BorderLayout.CENTER);
         add(botons, BorderLayout.SOUTH);
     }
-
-    public DlgAfegirExemplar(JFrame parent, prog2.vista.ControladorGUI ctrl) {
-    }
 }
