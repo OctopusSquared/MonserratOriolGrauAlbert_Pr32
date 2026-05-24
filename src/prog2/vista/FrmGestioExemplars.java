@@ -1,48 +1,52 @@
 package prog2.vista;
+import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class FrmGestioExemplars extends JDialog {
 
-    private final ControladorGUI ctrl;
-    private final DefaultListModel<String> model = new DefaultListModel<>();
+    private JPanel panel;
+    private JList Exemplars;
+    private JButton afegirExemplarButton;
+    private JButton tornarEnrereButton;
+    private Adaptador adaptador;
+    private DefaultListModel<String> model;
 
-    public FrmGestioExemplars(JFrame parent, ControladorGUI ctrl) {
-        super(parent, "Gestió Exemplars", true);
-        this.ctrl = ctrl;
-
-        setSize(520, 360);
+    public FrmGestioExemplars(AppBiblioUB parent, Adaptador adaptador) {
+        super(parent);
+        this.adaptador = adaptador;
+        setTitle("Gestio Exemplars");
+        setContentPane(panel);
+        setSize(600, 500);
         setLocationRelativeTo(parent);
-        setLayout(new BorderLayout(10,10));
-
-        JList<String> lst = new JList<>(model);
-
-        JButton btnRefrescar = new JButton("Refrescar");
-        JButton btnAfegir = new JButton("Afegir exemplar");
-
-        btnRefrescar.addActionListener(e -> carregar());
-        btnAfegir.addActionListener(e -> {
-            new prog2.vista.DlgAfegirExemplar(parent, ctrl).setVisible(true);
-            carregar();
+        setModal(true);
+        model = new DefaultListModel<>();
+        Exemplars.setModel(model);
+        carregarExemplars();
+        afegirExemplarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               FrmAfegirExemplars afegirExemplars = new FrmAfegirExemplars(FrmGestioExemplars.this, adaptador );
+               afegirExemplars.setVisible(true);
+               carregarExemplars();
+            }
         });
-
-        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        top.add(btnRefrescar);
-        top.add(btnAfegir);
-
-        add(top, BorderLayout.NORTH);
-        add(new JScrollPane(lst), BorderLayout.CENTER);
-
-        carregar();
+        tornarEnrereButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
-    private void carregar() {
-        try {
-            model.clear();
-            for (String x : ctrl.exemplars()) model.addElement(x);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    public void carregarExemplars(){
+        model.clear(); // buidem el model
+        ArrayList<String> exemplars = (ArrayList<String>) adaptador.llistaExemplarsToLlistaString();
+        for (String u : exemplars) {
+            model.addElement(u); // afegim al model, el JList es refresca sol
         }
     }
 }

@@ -1,74 +1,108 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class AppBiblioUB extends JFrame {
 
-    private final prog2.vista.ControladorGUI ctrl;
+    private JPanel biblioUB;
+    private JButton btnGestioUsuaris;
+    private JButton btnGestioExemplars;
+    private JButton btnGestioPrestecs;
+    private JButton guardarDadesButton;
+    private JButton carregarDadesButton;
+    private JButton sortirButton;
+    private Adaptador adaptador;
 
-    public AppBiblioUB() {
-        this.ctrl = new prog2.vista.ControladorGUI(new prog2.vista.AdaptadorFacade());
 
-        setTitle("BiblioUB - Pràctica 3 Part 2");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(600, 220);
-        setLocationRelativeTo(null);
-
-        JButton btnUsuaris = new JButton("Gestió Usuaris");
-        JButton btnExemplars = new JButton("Gestió Exemplars");
-        JButton btnPrestecs = new JButton("Gestió Préstecs");
-        JButton btnGuardar = new JButton("Guardar dades");
-        JButton btnCarregar = new JButton("Carregar dades");
-
-        btnUsuaris.addActionListener(e -> new prog2.vista.FrmGestioUsuaris(this, ctrl).setVisible(true));
-        btnExemplars.addActionListener(e -> new prog2.vista.FrmGestioExemplars(this, ctrl).setVisible(true));
-        btnPrestecs.addActionListener(e -> new prog2.vista.FrmGestioPrestecs(this, ctrl).setVisible(true));
-
-        btnGuardar.addActionListener(e -> guardar());
-        btnCarregar.addActionListener(e -> carregar());
-
-        JPanel p = new JPanel(new GridLayout(2, 3, 10, 10));
-        p.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        p.add(btnUsuaris);
-        p.add(btnExemplars);
-        p.add(btnPrestecs);
-        p.add(btnGuardar);
-        p.add(btnCarregar);
-
-        setContentPane(p);
-    }
-
-    private void guardar() {
-        try {
-            String nom = JOptionPane.showInputDialog(this, "Nom del fitxer per guardar:");
-            if (nom == null || nom.trim().isEmpty()) return;
-            ctrl.guardar(nom.trim());
-            JOptionPane.showMessageDialog(this, "Dades guardades correctament.");
-        } catch (Exception ex) {
-            showError(ex);
-        }
-    }
-
-    private void carregar() {
-        try {
-            JFileChooser fc = new JFileChooser();
-            int res = fc.showOpenDialog(this);
-            if (res != JFileChooser.APPROVE_OPTION) return;
-            File f = fc.getSelectedFile();
-            ctrl.carregar(f);
-            JOptionPane.showMessageDialog(this, "Dades carregades correctament.");
-        } catch (Exception ex) {
-            showError(ex);
-        }
-    }
-
-    private void showError(Exception ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new AppBiblioUB().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            AppBiblioUB biblioUB = new AppBiblioUB();
+            biblioUB.setVisible(true);
+        });
     }
+    public AppBiblioUB() {
+        adaptador  = new Adaptador();
+        setTitle("Biblioteca UB");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(biblioUB);
+        setSize(500,400);
+        setLocationRelativeTo(null);
+        btnGestioUsuaris.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioUsuaris gestioUsuaris = new FrmGestioUsuaris(AppBiblioUB.this, adaptador);
+                gestioUsuaris.setVisible(true);
+            }
+        });
+        btnGestioExemplars.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioExemplars gestioExemplars = new FrmGestioExemplars(AppBiblioUB.this, adaptador);
+                gestioExemplars.setVisible(true);
+            }
+        });
+        sortirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnGestioPrestecs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmGestioPrestecs gestioPrestecs = new FrmGestioPrestecs(AppBiblioUB.this, adaptador);
+                gestioPrestecs.setVisible(true);
+            }
+        });
+        guardarDadesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomFitxer = JOptionPane.showInputDialog(
+                        AppBiblioUB.this,
+                        "Introdueix el nom del fitxer:",
+                        "Guardar Dades",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (nomFitxer != null && !nomFitxer.trim().isEmpty()) {
+                    try {
+                        adaptador.guardaDades(nomFitxer.trim());
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades guardades correctament.");
+                    } catch (BiblioException ex) {
+                        JOptionPane.showMessageDialog(AppBiblioUB.this,
+                                "Error: " + ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+        carregarDadesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Carregar Dades");
+                int resultat = fileChooser.showOpenDialog(AppBiblioUB.this);
+
+                if (resultat == JFileChooser.APPROVE_OPTION) {
+                    String cami = fileChooser.getSelectedFile().getAbsolutePath();
+                    try {
+                        adaptador.carregaDades(cami);
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades carregades correctament.");
+                    } catch (BiblioException ex) {
+                        JOptionPane.showMessageDialog(AppBiblioUB.this,
+                                "Error: " + ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+        });
+    }
+
 }

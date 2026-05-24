@@ -1,49 +1,54 @@
 package prog2.vista;
 
-import prog2.vista.AppBiblioUB;
+import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class FrmGestioUsuaris extends JDialog {
 
-    private final ControladorGUI ctrl;
-    private final DefaultListModel<String> model = new DefaultListModel<>();
-    private final JList<String> lst = new JList<>(model);
+    private JPanel panel;
+    private JButton btnAfegir;
+    private JList Usuaris;
+    private JButton btnTornar;
+    private Adaptador adaptador;
+    private DefaultListModel<String> model;
 
-    public FrmGestioUsuaris(JFrame parent, ControladorGUI ctrl) {
-        super(parent, "Gestió Usuaris", true);
-        this.ctrl = ctrl;
-
-        setSize(520, 360);
+    public FrmGestioUsuaris(AppBiblioUB parent, Adaptador adaptador) {
+        super(parent);
+        this.adaptador = adaptador;
+        setTitle("Gestio Usuari");
+        setContentPane(panel);
+        setSize(600, 500);
         setLocationRelativeTo(parent);
-        setLayout(new BorderLayout(10,10));
-
-        JButton btnRefrescar = new JButton("Refrescar");
-        JButton btnAfegir = new JButton("Afegir usuari");
-
-        btnRefrescar.addActionListener(e -> carregarLlista());
-        btnAfegir.addActionListener(e -> {
-            new DlgAfegirUsuari(parent, ctrl).setVisible(true);
-            carregarLlista();
+        setModal(true);
+        model = new DefaultListModel<>();
+        Usuaris.setModel(model);
+        carregarUsuaris();
+        btnAfegir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmAfegirUsuari afegirUsuari = new FrmAfegirUsuari(FrmGestioUsuaris.this, adaptador);
+                afegirUsuari.setVisible(true);
+                carregarUsuaris();
+            }
         });
 
-        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        top.add(btnRefrescar);
-        top.add(btnAfegir);
-
-        add(top, BorderLayout.NORTH);
-        add(new JScrollPane(lst), BorderLayout.CENTER);
-
-        carregarLlista();
+        btnTornar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
-
-    private void carregarLlista() {
-        try {
-            model.clear();
-            for (String u : ctrl.usuaris()) model.addElement(u);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    public void carregarUsuaris() {
+        model.clear(); // buidem el model
+        ArrayList<String> usuaris = (ArrayList<String>) adaptador.llistaUsuarisToLlistaString();
+        for (String u : usuaris) {
+            model.addElement(u); // afegim al model, el JList es refresca sol
         }
     }
+
 }
