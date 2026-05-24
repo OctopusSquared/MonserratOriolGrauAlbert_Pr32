@@ -32,11 +32,13 @@ public class AppBiblioUB extends JFrame {
     }
     public AppBiblioUB() {
         adaptador  = new Adaptador();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         setSize(500,300);
-        setLocationRelativeTo(null);
         setTitle("Biblioteca UB");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setContentPane(biblioUB);
+
         guardarDadesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
