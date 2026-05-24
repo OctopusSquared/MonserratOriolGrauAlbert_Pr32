@@ -23,7 +23,7 @@ public class FrmAfegirPrestec extends JDialog {
         super(parent);
         this.adaptador = adaptador;
 
-        this.setSize(500, 400);
+        this.setSize(700, 400);
         this.setTitle("Afegir Prestec");
         this.setLocationRelativeTo(parent);
         setContentPane(panel);
