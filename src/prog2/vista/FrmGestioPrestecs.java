@@ -22,6 +22,8 @@ public class FrmGestioPrestecs extends JDialog {
 
     public FrmGestioPrestecs(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
+        this.adaptador = adaptador;
+
 
         setSize(600, 400);
         setTitle("Gestio Prestecs");
@@ -32,9 +34,8 @@ public class FrmGestioPrestecs extends JDialog {
 
         model = new DefaultListModel<>();
         Prestecs.setModel(model);
-        carregarPrestecs();
 
-        this.adaptador = adaptador;
+        carregarPrestecs();
 
         prestecsRetornatsCheckBox.addChangeListener(new ChangeListener() {
             @Override

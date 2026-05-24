@@ -18,6 +18,7 @@ public class FrmGestioExemplars extends JDialog {
 
     public FrmGestioExemplars(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
+        this.adaptador = adaptador;
 
         setSize(600, 400);
         setTitle("Gestio Exemplars");
@@ -27,9 +28,8 @@ public class FrmGestioExemplars extends JDialog {
 
         model = new DefaultListModel<>();
         Exemplars.setModel(model);
-        carregarExemplars();
 
-        this.adaptador = adaptador;
+        carregarExemplars();
 
         tornarEnrereButton.addActionListener(new ActionListener() {
             @Override

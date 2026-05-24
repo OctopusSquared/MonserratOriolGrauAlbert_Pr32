@@ -18,6 +18,7 @@ public class FrmGestioUsuaris extends JDialog {
 
     public FrmGestioUsuaris(AppBiblioUB parent, Adaptador adaptador) {
         super(parent);
+        this.adaptador = adaptador;
 
         setSize(600, 400);
         setTitle("Gestio Usuari");
@@ -27,9 +28,8 @@ public class FrmGestioUsuaris extends JDialog {
 
         model = new DefaultListModel<>();
         Usuaris.setModel(model);
-        carregarUsuaris();
 
-        this.adaptador = adaptador;
+        carregarUsuaris();
 
         btnAfegir.addActionListener(new ActionListener() {
             @Override

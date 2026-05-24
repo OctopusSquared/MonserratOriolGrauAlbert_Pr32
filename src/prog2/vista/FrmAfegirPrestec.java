@@ -21,6 +21,7 @@ public class FrmAfegirPrestec extends JDialog {
 
     public FrmAfegirPrestec(FrmGestioPrestecs parent, Adaptador adaptador) {
         super(parent);
+        this.adaptador = adaptador;
 
         this.setSize(500, 400);
         this.setTitle("Afegir Prestec");
@@ -31,7 +32,6 @@ public class FrmAfegirPrestec extends JDialog {
         carregarExemplars();
         carregarUsuaris();
 
-        this.adaptador = adaptador;
 
         afegirButton.addActionListener(new ActionListener() {
             @Override
