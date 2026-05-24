@@ -1,4 +1,4 @@
-package Vista;
+package prog2.vista;
 
 import java.io.File;
 import java.lang.reflect.Method;

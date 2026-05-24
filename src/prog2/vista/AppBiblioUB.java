@@ -9,7 +9,7 @@ public class AppBiblioUB extends JFrame {
     private final prog2.vista.ControladorGUI ctrl;
 
     public AppBiblioUB() {
-        this.ctrl = new prog2.vista.ControladorGUI(new Vista.AdaptadorFacade());
+        this.ctrl = new prog2.vista.ControladorGUI(new prog2.vista.AdaptadorFacade());
 
         setTitle("BiblioUB - Pràctica 3 Part 2");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -7,7 +7,7 @@ public class ControladorGUI {
 
     private final prog2.vista.IAdaptadorBiblio adapt;
 
-    public ControladorGUI(Vista.AdaptadorFacade adapt) {
+    public ControladorGUI(prog2.vista.AdaptadorFacade adapt) {
         this.adapt = (prog2.vista.IAdaptadorBiblio) adapt;
     }
 
