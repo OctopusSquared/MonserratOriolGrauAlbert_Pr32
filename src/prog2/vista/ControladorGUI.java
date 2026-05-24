@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ControladorGUI {
 
-    private final Vista.IAdaptadorBiblio adapt;
+    private final prog2.vista.IAdaptadorBiblio adapt;
 
     public ControladorGUI(Vista.AdaptadorFacade adapt) {
-        this.adapt = (Vista.IAdaptadorBiblio) adapt;
+        this.adapt = (prog2.vista.IAdaptadorBiblio) adapt;
     }
 
     public List<String> usuaris() throws Exception { return adapt.llistaUsuaris(); }

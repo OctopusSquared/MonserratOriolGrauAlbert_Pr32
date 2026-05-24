@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class DlgAfegirUsuari extends JDialog {
 
-    public DlgAfegirUsuari(JFrame parent, Vista.ControladorGUI ctrl) {
+    public DlgAfegirUsuari(JFrame parent, ControladorGUI ctrl) {
         super(parent, "Afegir usuari", true);
 
         setSize(420, 240);

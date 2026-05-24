@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class FrmGestioExemplars extends JDialog {
 
-    private final Vista.ControladorGUI ctrl;
+    private final ControladorGUI ctrl;
     private final DefaultListModel<String> model = new DefaultListModel<>();
 
-    public FrmGestioExemplars(JFrame parent, Vista.ControladorGUI ctrl) {
+    public FrmGestioExemplars(JFrame parent, ControladorGUI ctrl) {
         super(parent, "Gestió Exemplars", true);
         this.ctrl = ctrl;
 
@@ -23,7 +23,7 @@ public class FrmGestioExemplars extends JDialog {
 
         btnRefrescar.addActionListener(e -> carregar());
         btnAfegir.addActionListener(e -> {
-            new Vista.DlgAfegirExemplar(parent, ctrl).setVisible(true);
+            new prog2.vista.DlgAfegirExemplar(parent, ctrl).setVisible(true);
             carregar();
         });
 

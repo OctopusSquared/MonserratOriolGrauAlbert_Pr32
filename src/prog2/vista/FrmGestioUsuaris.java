@@ -38,9 +38,6 @@ public class FrmGestioUsuaris extends JDialog {
         carregarLlista();
     }
 
-    public FrmGestioUsuaris(AppBiblioUB parent, Vista.ControladorGUI ctrl) {
-    }
-
     private void carregarLlista() {
         try {
             model.clear();
