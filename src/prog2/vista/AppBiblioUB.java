@@ -16,6 +16,9 @@ public class AppBiblioUB extends JFrame {
     private JButton guardarDadesButton;
     private JButton carregarDadesButton;
     private JButton sortirButton;
+    private JLabel Separador1;
+    private JLabel Separador2;
+
     private Adaptador adaptador;
 
 
@@ -31,7 +34,7 @@ public class AppBiblioUB extends JFrame {
         setTitle("Biblioteca UB");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(biblioUB);
-        setSize(500,400);
+        setSize(500,300);
         setLocationRelativeTo(null);
         btnGestioUsuaris.addActionListener(new ActionListener() {
             @Override
@@ -71,10 +74,10 @@ public class AppBiblioUB extends JFrame {
                 if (nomFitxer != null && !nomFitxer.trim().isEmpty()) {
                     try {
                         adaptador.guardaDades(nomFitxer.trim());
-                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades guardades correctament.");
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades guardades.");
                     } catch (BiblioException ex) {
                         JOptionPane.showMessageDialog(AppBiblioUB.this,
-                                "Error: " + ex.getMessage(),
+                                "Atencio: " + ex.getMessage(),
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
@@ -92,10 +95,10 @@ public class AppBiblioUB extends JFrame {
                     String cami = fileChooser.getSelectedFile().getAbsolutePath();
                     try {
                         adaptador.carregaDades(cami);
-                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades carregades correctament.");
+                        JOptionPane.showMessageDialog(AppBiblioUB.this, "Dades carregades.");
                     } catch (BiblioException ex) {
                         JOptionPane.showMessageDialog(AppBiblioUB.this,
-                                "Error: " + ex.getMessage(),
+                                "Atencio: " + ex.getMessage(),
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
