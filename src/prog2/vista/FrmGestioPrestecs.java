@@ -7,11 +7,10 @@ import java.awt.*;
 
 public class FrmGestioPrestecs extends JDialog {
 
-    private final prog2.vista.ControladorGUI ctrl;
-    private final DefaultListModel<String> model;
+    private final ControladorGUI ctrl;
+    private final DefaultListModel<String> model = new DefaultListModel<>();
 
-    public FrmGestioPrestecs(AppBiblioUB appBiblioUB, ControladorGUI ctrl, prog2.vista.ControladorGUI ctrl1, DefaultListModel<String> model) {
-        this.ctrl = ctrl1;
-        this.model = model;
+    public FrmGestioPrestecs(JFrame parent, ControladorGUI ctrl) {
+        this.ctrl = ctrl;
     }
 }
